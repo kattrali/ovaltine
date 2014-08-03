@@ -1,7 +1,5 @@
 
 require 'ovaltine/storyboard'
-require 'ovaltine/objc/storyboard_formatter'
-require 'ovaltine/objc/storyboard_templates'
 require 'ovaltine/version'
 require 'ovaltine/xcode_project'
 require 'ovaltine/xcode_project/pbxobject'
@@ -12,6 +10,7 @@ require 'ovaltine/xcode_project/ext/stdlib'
 module Ovaltine
 
   def self.create_constant_files(path, options)
+    require_formatter(options[:language])
     files = Dir.glob("#{path}/**/*.storyboard")
     groups = files.group_by {|f| File.basename(f).sub('.storyboard','')}
     formatters = groups.map do |name, paths|
@@ -61,6 +60,14 @@ module Ovaltine
       false
     else
       answer.downcase == 'y'
+    end
+  end
+
+  def self.require_formatter(language='objc')
+    case language
+    when 'objc'
+      require 'ovaltine/objc/storyboard_formatter'
+      require 'ovaltine/objc/storyboard_templates'
     end
   end
 end

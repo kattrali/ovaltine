@@ -1,7 +1,8 @@
 $:.unshift File.expand_path('../../lib', __FILE__)
 
 require 'bacon'
-require 'ovaltine'
+require 'ovaltine/storyboard'
+require 'ovaltine/objc/storyboard_formatter'
 
 describe 'StoryboardFormatter' do
 

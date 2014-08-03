@@ -12,7 +12,8 @@ require 'ovaltine'
 require 'optparse'
 
 parser_options = {
-  :prefix => ''
+  :prefix => '',
+  :language => 'objc'
 }
 
 def exit_with_error(message)
@@ -36,6 +37,9 @@ OptionParser.new do |opts|
   end
   opts.on('--auto-replace', 'Automatically replace files with the same name as generated files') do
     parser_options[:auto_replace] = true
+  end
+  opts.on('--objc', 'Specify Objective-C as the template language (Default)') do
+    parser_options[:language] = 'objc'
   end
   opts.on_tail('-h', '--help', 'Show this message') { puts opts; exit }
   opts.on_tail("-v", "--version", "Show version") { puts Ovaltine::VERSION; exit }
