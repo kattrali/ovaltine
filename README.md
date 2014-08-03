@@ -1,4 +1,4 @@
-# Ovaltine
+# Ovaltine [![Build Status](https://travis-ci.org/kattrali/ovaltine.svg?branch=master)](https://travis-ci.org/kattrali/ovaltine)
 
 The chocolatey treat which makes your code clean! Yum!
 
