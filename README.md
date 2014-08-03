@@ -10,6 +10,16 @@ The chocolatey treat which makes your code clean! Yum!
 gem install ovaltine
 ```
 
-# Usage
+# Example Usage
 
-Run `ovaltine` from the command line
+```
+ovaltine --prefix ABC --auto-replace --auto-add --project path/to/project.xcodeproj path/to/project/files
+```
+
+Run from the command line or as a build step (if you are brave!)
+
+# Additional Documentation
+
+```
+ovaltine --help
+```
