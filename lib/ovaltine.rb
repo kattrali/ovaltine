@@ -6,6 +6,7 @@ require 'ovaltine/version'
 require 'ovaltine/xcode_project'
 require 'ovaltine/xcode_project/pbxobject'
 require 'ovaltine/xcode_project/pbxgroup'
+require 'ovaltine/xcode_project/pbxfilereference'
 require 'ovaltine/xcode_project/ext/stdlib'
 
 module Ovaltine
@@ -18,12 +19,18 @@ module Ovaltine
       StoryboardFormatter.new(storyboard, options[:prefix], (options[:output_directory] || path))
     end
     generated_paths = formatters.map(&:output_paths).flatten
-    if path = generated_paths.detect {|p| File.exist?(p)} and !options[:auto_replace]
-      if prompt("Some generated files already exist. Overwrite? (Y/n)", 'y')
-        write_files(formatters)
-      end
-    else
-      write_files(formatters)
+    if existing_path = generated_paths.detect {|p| File.exist?(p)} and !options[:auto_replace]
+      return unless prompt("Some generated files already exist. Overwrite? (Y/n)", 'y')
+    end
+
+    paths = write_files(formatters)
+
+    if project_filepath = options[:project] || Dir.glob("#{File.dirname(path)}/**/*.xcodeproj").first
+      return unless options[:auto_add] or prompt("[Experimental] Add files to project? (y/N)", 'n')
+      project = XcodeProject.new(project_filepath)
+      paths.each {|p| project.add_file_ref(p)}
+      project.save
+      puts "#{File.basename(project_filepath)} updated"
     end
   end
 
@@ -39,6 +46,7 @@ module Ovaltine
       puts "  * #{File.basename(path)}"
     end
     puts "\n#{files.size} files generated"
+    files
   end
 
   def self.prompt title, default_answer

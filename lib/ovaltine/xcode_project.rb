@@ -4,14 +4,11 @@ module Ovaltine
 
     def load_dependencies
       unless @@loaded ||= false
-        require 'pbxobject'
-        require 'pbxgroup'
-        require 'ext/stdlib'
         unless Object.const_defined?(:JSON)
           begin
             require 'json'
           rescue LoadError
-            require File.expand_path(File.join(File.dirname(__FILE__),'../../../vendor/json_pure/generator'))
+            require File.expand_path(File.join(File.dirname(__FILE__),'../../vendor/json_pure/parser'))
           end
         end
         @@loaded = true
@@ -20,13 +17,17 @@ module Ovaltine
 
     def initialize path
       load_dependencies
-      @path = path
-      @json = JSON.parse(`plutil -convert json -o - "#{path}"`)
+      if path =~ /\.xcodeproj$/
+        @path = File.join(path, 'project.pbxproj')
+      else
+        @path = path
+      end
+      @json = JSON.parse(`plutil -convert json -o - "#{@path}"`)
 
       @json["objects"].each do |uuid, hash|
         klass = PBXObject
         begin
-          klass = Object.const_get hash["isa"]
+          klass = Ovaltine::XcodeProject.const_get "#{hash['isa']}"
         rescue
         end
 
@@ -54,12 +55,12 @@ module Ovaltine
     end
 
     def objects_of_class klass
-      str = klass.to_s
-      objects.select { |obj| obj["isa"] == str }
+      str = klass.to_s.split('::').last
+      objects.select {|obj| obj["isa"] == str }
     end
 
     def objects_with_uuids uuids
-      uuids.map { |uuid| self.object_with_uuid uuid }
+      uuids.map {|uuid| self.object_with_uuid uuid }
     end
 
     def object_with_uuid uuid
@@ -68,6 +69,7 @@ module Ovaltine
 
     def add_file_ref path
       relpath = File.expand_path(path).gsub(File.dirname(File.dirname(File.expand_path(@path))), '')[1..-1]
+      relpath = relpath[(relpath.index('/') + 1)..-1]
       return nil if files.detect {|ref| ref["path"] == relpath}
       ref = PBXFileReference.create(relpath, file_type(path))
       add_object(ref)
