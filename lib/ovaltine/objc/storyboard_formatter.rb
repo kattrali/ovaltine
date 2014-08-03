@@ -103,7 +103,7 @@ module Ovaltine
     end
 
     def variable_name identifier
-      "_#{identifier.gsub(/\W/,'').gsub(/\b\w/){ $&.downcase }}"
+      "_#{@prefix}#{identifier.gsub(/\W/,'').gsub(/\b\w/){ $&.downcase }}"
     end
 
 
