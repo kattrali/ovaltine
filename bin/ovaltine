@@ -12,7 +12,6 @@ require 'ovaltine'
 require 'optparse'
 
 parser_options = {
-  :output_directory => '.',
   :prefix => ''
 }
 
