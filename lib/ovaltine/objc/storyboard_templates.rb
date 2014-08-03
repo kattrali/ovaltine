@@ -20,7 +20,7 @@ module Ovaltine
 
 #import <Foundation/Foundation.h>
 
-@interface {CLASS_NAME}
+@interface {CLASS_NAME} : NSObject
 
 +(UIStoryboard *)storyboard;
 
@@ -40,7 +40,7 @@ module Ovaltine
 #import <UIKit/UIKit.h>
 #import "{CLASS_NAME}.h"
 
-static UIStoryboard* _storyboard = nil;
+static UIStoryboard *_storyboard = nil;
 {STATIC_VARIABLES}
 
 @implementation {CLASS_NAME}
