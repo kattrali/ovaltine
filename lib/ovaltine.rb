@@ -3,6 +3,10 @@ require 'ovaltine/storyboard'
 require 'ovaltine/objc/storyboard_formatter'
 require 'ovaltine/objc/storyboard_templates'
 require 'ovaltine/version'
+require 'ovaltine/xcode_project'
+require 'ovaltine/xcode_project/pbxobject'
+require 'ovaltine/xcode_project/pbxgroup'
+require 'ovaltine/xcode_project/ext/stdlib'
 
 module Ovaltine
 
