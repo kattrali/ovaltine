@@ -9,6 +9,7 @@ module Ovaltine
             require 'json'
           rescue LoadError
             require File.expand_path(File.join(File.dirname(__FILE__),'../../vendor/json_pure/parser'))
+            require File.expand_path(File.join(File.dirname(__FILE__),'../../vendor/json_pure/generator'))
           end
         end
         @@loaded = true

@@ -55,6 +55,8 @@ module JSON
 
       UNPARSED = Object.new
 
+      class ParserError < Error; end
+
       # Creates a new JSON::Pure::Parser instance for the string _source_.
       #
       # It will be configured by the _opts_ hash. _opts_ can have the following
