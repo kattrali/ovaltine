@@ -1,0 +1,53 @@
+#!/usr/bin/env ruby
+
+if RUBY_VERSION < '1.8.7'
+  abort "error: Ovaltine requires Ruby 1.8.7 or higher."
+end
+
+if $0 == __FILE__
+  $:.unshift File.expand_path('../../lib', __FILE__)
+end
+
+require 'ovaltine'
+require 'optparse'
+
+parser_options = {
+  :output_directory => '.',
+  :prefix => ''
+}
+
+def exit_with_error(message)
+  $stderr.puts "[!] #{message}"
+  exit 1
+end
+
+OptionParser.new do |opts|
+  opts.banner = "Usage: ovaltine [options] PATH"
+  opts.on('-p', '--project PROJECT', 'Specify path to .xcodeproj directory') do |path|
+    parser_options[:project] = path
+  end
+  opts.on('-o', '--output DIR', 'Specify output directory. Default is pwd') do |path|
+    parser_options[:output_directory] = path
+  end
+  opts.on('--prefix PREFIX', 'Class prefix for generated files') do |prefix|
+    parser_options[:prefix] = prefix
+  end
+  opts.on('--auto-add', 'Automatically add generated files to the Xcode project') do
+    parser_options[:auto_add] = true
+  end
+  opts.on('--auto-replace', 'Automatically replace files with the same name as generated files') do
+    parser_options[:auto_replace] = true
+  end
+  opts.on_tail('-h', '--help', 'Show this message') { puts opts; exit }
+  opts.on_tail("-v", "--version", "Show version") { puts Ovaltine::VERSION; exit }
+  opts.parse!
+end
+
+project_path = ARGV.last
+if !project_path
+  exit_with_error("No file path specified")
+elsif !File.exist?(project_path)
+  exit_with_error("File not found for path: #{project_path}")
+end
+
+Ovaltine.create_constant_files(project_path, parser_options)
