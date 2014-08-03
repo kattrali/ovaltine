@@ -28,9 +28,12 @@ module Ovaltine
     if project_filepath = options[:project] || Dir.glob("#{File.dirname(path)}/**/*.xcodeproj").first
       return unless options[:auto_add] or prompt("[Experimental] Add files to project? (y/N)", 'n')
       project = XcodeProject.new(project_filepath)
-      paths.sort.each {|p| project.add_file_ref(p)}
-      project.save
-      puts "#{File.basename(project_filepath)} updated"
+      if paths.sort.map {|p| project.add_file_ref(p)}.compact.size > 0
+        project.save
+        puts "#{File.basename(project_filepath)} updated"
+      else
+        puts "All files already added"
+      end
     end
   end
 
