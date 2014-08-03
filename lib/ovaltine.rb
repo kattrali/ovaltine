@@ -26,7 +26,15 @@ module Ovaltine
   private
 
   def self.write_files formatters
-    formatters.each(&:write)
+    files = []
+    formatters.each do |formatter|
+      formatter.write
+      files += formatter.output_paths
+    end
+    files.each do |path|
+      puts "  * #{File.basename(path)}"
+    end
+    puts "\n#{files.size} files generated"
   end
 
   def self.prompt title, default_answer
