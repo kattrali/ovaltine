@@ -17,7 +17,7 @@ parser_options = {
 }
 
 def exit_with_error(message)
-  $stderr.puts "[!] #{message}"
+  $stderr.puts "[!] #{message}. Run `ovaltine --help` for available options"
   exit 1
 end
 
