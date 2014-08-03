@@ -15,7 +15,7 @@ module Ovaltine
     groups = files.group_by {|f| File.basename(f).sub('.storyboard','')}
     formatters = groups.map do |name, paths|
       storyboard = Storyboard.new(name, paths)
-      StoryboardFormatter.new(storyboard, options[:prefix], options[:output_directory])
+      StoryboardFormatter.new(storyboard, options[:prefix], (options[:output_directory] || path))
     end
     generated_paths = formatters.map(&:output_paths).flatten
     if path = generated_paths.detect {|p| File.exist?(p)} and !options[:auto_replace]
