@@ -1,7 +1,7 @@
 
 require 'ovaltine/storyboard'
-require 'ovaltine/storyboard_formatter'
-require 'ovaltine/storyboard_templates'
+require 'ovaltine/objc/storyboard_formatter'
+require 'ovaltine/objc/storyboard_templates'
 require 'ovaltine/version'
 
 module Ovaltine
