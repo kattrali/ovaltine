@@ -29,7 +29,7 @@ OptionParser.new do |opts|
   opts.on('-o', '--output DIR', 'Specify output directory. Default is pwd') do |path|
     parser_options[:output_directory] = path
   end
-  opts.on('--prefix PREFIX', 'Class prefix for generated files') do |prefix|
+  opts.on('--prefix PREFIX', 'Specify class prefix for generated files') do |prefix|
     parser_options[:prefix] = prefix
   end
   opts.on('--auto-add', 'Automatically add generated files to the Xcode project') do
