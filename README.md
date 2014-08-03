@@ -16,7 +16,7 @@ gem install ovaltine
 ovaltine --prefix ABC --auto-replace --auto-add --project path/to/project.xcodeproj path/to/project/files
 ```
 
-Run from the command line or as a build step (if you are brave!)
+Run from the command line or as a build step (if you are brave!) [Here](https://gist.github.com/kattrali/bbe9e2464d02a8ca4cb1) are some example files generated using `ovaltine`.
 
 ## Additional Documentation
 
