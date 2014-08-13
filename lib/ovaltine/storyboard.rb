@@ -35,15 +35,15 @@ module Ovaltine
       case node.name
       when 'segue'
         if identifier = node.attributes["identifier"]
-          segue_identifiers << identifier
+          segue_identifiers << identifier unless segue_identifiers.include?(identifier)
         end
       when /viewcontroller/i, 'navigationController'
         if identifier = node.attributes["storyboardIdentifier"]
-          view_controller_identifiers << identifier
+          view_controller_identifiers << identifier unless view_controller_identifiers.include?(identifier)
         end
       when /cell/i
         if identifier = node.attributes["reuseIdentifier"]
-          cell_reuse_identifiers << identifier
+          cell_reuse_identifiers << identifier unless cell_reuse_identifiers.include?(identifier)
         end
       end
     end
