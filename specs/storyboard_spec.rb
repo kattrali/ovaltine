@@ -22,6 +22,10 @@ describe 'Storyboard' do
     @storyboard.view_controller_identifiers.should.include "listViewController"
   end
 
+  it 'caches identifiers for navigation view controllers' do
+    @storyboard.view_controller_identifiers.should.include "navigationViewController"
+  end
+
   it 'caches identifiers for named segues' do
     @storyboard.segue_identifiers.should.include "starterSegueIdentifier"
   end

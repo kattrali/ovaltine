@@ -37,7 +37,7 @@ module Ovaltine
         if identifier = node.attributes["identifier"]
           segue_identifiers << identifier
         end
-      when /viewcontroller/i
+      when /viewcontroller/i, 'navigationController'
         if identifier = node.attributes["storyboardIdentifier"]
           view_controller_identifiers << identifier
         end
