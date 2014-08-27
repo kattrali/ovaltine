@@ -7,11 +7,12 @@ module Ovaltine
     SEGUE_SECTION_TITLE='Segue Identifiers'
     VIEW_CONTROLLER_SECTION_TITLE='View Controllers'
 
-    def initialize storyboard, prefix, output_path
+    def initialize storyboard, prefix, copyright, output_path
       scrubbed_name = storyboard.name.gsub(/\W/,'_')
       @storyboard = storyboard
       @prefix = prefix
       @classname = "#{@prefix}#{scrubbed_name}Storyboard"
+      @copyright = copyright
       @header_path = File.join(File.expand_path(output_path), "#{classname}.h")
       @impl_path = File.join(File.expand_path(output_path), "#{classname}.m")
     end
@@ -29,6 +30,14 @@ module Ovaltine
       end
     end
 
+    def copyright_text
+      if @copyright.length > 0
+        "Copyright (c) #{Time.new.year} #{@copyright}. All rights reserved."
+      else
+        ''
+      end
+    end
+
     private
 
     def generate_header
@@ -37,7 +46,8 @@ module Ovaltine
         .gsub('{CLASS_NAME}', classname)\
         .gsub('{REUSE_IDENTIFIERS}', reuse_identifier_definitions)\
         .gsub('{SEGUE_IDENTIFIERS}', segue_identifier_definitions)\
-        .gsub('{VIEW_CONTROLLERS}', view_controller_definitions)
+        .gsub('{VIEW_CONTROLLERS}', view_controller_definitions)\
+        .gsub('{COPYRIGHT}', copyright_text)
     end
 
     def generate_implementation
@@ -48,6 +58,7 @@ module Ovaltine
         .gsub('{REUSE_IDENTIFIERS}', reuse_identifier_implementations)\
         .gsub('{SEGUE_IDENTIFIERS}', segue_identifier_implementations)\
         .gsub('{VIEW_CONTROLLERS}', view_controller_implementations)\
+        .gsub('{COPYRIGHT}', copyright_text)\
         .gsub('{STORYBOARD}', StoryboardTemplates::STORYBOARD_IMPLEMENTATION_TEMPLATE.gsub('{IDENTIFIER_CONSTANT_NAME}', variable_name(storyboard.name)))
     end
 
@@ -105,7 +116,6 @@ module Ovaltine
     def variable_name identifier
       "_#{@prefix}#{identifier.gsub(/\W/,'').gsub(/\b\w/){ $&.downcase }}"
     end
-
 
     def format_view_controller identifier
       format(identifier, 'controller', 'ViewController', true)

@@ -12,6 +12,7 @@ require 'ovaltine'
 require 'optparse'
 
 parser_options = {
+  :copy => '',
   :prefix => '',
   :language => 'objc'
 }
@@ -31,6 +32,9 @@ OptionParser.new do |opts|
   end
   opts.on('--prefix PREFIX', 'Specify class prefix for generated files') do |prefix|
     parser_options[:prefix] = prefix
+  end
+  opts.on('--copyright COPY', 'Specify copyright info for file headers') do |copy|
+    parser_options[:copy] = copy
   end
   opts.on('--auto-add', 'Automatically add generated files to the Xcode project') do
     parser_options[:auto_add] = true
