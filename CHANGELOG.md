@@ -1,3 +1,8 @@
+# 1.0.5
+
+- Cache identifiers for navigation controllers
+- Hotfix for writing duplicate identifiers
+
 # 1.0.4
 
 - Hotfix for failed error handling in Ruby 1.8.7
