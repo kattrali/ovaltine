@@ -78,7 +78,7 @@ module Ovaltine
     end
 
     def reuse_identifier_implementations
-      prepend_title(CELL_REUSE_SECTION_TITLE, storyboard.cell_reuse_identifiers.each_with_index.map do |identifier, index|
+      prepend_title(CELL_REUSE_SECTION_TITLE, storyboard.cell_reuse_identifiers.sort.each_with_index.map do |identifier, index|
         StoryboardTemplates::REUSE_IMPLEMENTATION_TEMPLATE\
           .gsub('{IDENTIFIER}', format_reuse_identifier(identifier))\
           .gsub('{IDENTIFIER_CONSTANT_NAME}', variable_name(identifier))
@@ -86,13 +86,13 @@ module Ovaltine
     end
 
     def segue_identifier_definitions
-      prepend_title(SEGUE_SECTION_TITLE, storyboard.segue_identifiers.each_with_index.map do |identifier, index|
+      prepend_title(SEGUE_SECTION_TITLE, storyboard.segue_identifiers.sort.each_with_index.map do |identifier, index|
         StoryboardTemplates::SEGUE_DEFINITION_TEMPLATE.gsub('{IDENTIFIER}', format(identifier, 'identifier', 'SegueIdentifier'))
       end.join("\n"))
     end
 
     def segue_identifier_implementations
-      prepend_title(SEGUE_SECTION_TITLE, storyboard.segue_identifiers.each_with_index.map do |identifier, index|
+      prepend_title(SEGUE_SECTION_TITLE, storyboard.segue_identifiers.sort.each_with_index.map do |identifier, index|
         StoryboardTemplates::SEGUE_IMPLEMENTATION_TEMPLATE\
           .gsub('{IDENTIFIER}', format_segue_identifier(identifier))\
           .gsub('{IDENTIFIER_CONSTANT_NAME}', variable_name(identifier))
@@ -100,13 +100,13 @@ module Ovaltine
     end
 
     def view_controller_definitions
-      prepend_title(VIEW_CONTROLLER_SECTION_TITLE, storyboard.view_controller_identifiers.each_with_index.map do |identifier, index|
+      prepend_title(VIEW_CONTROLLER_SECTION_TITLE, storyboard.view_controller_identifiers.sort.each_with_index.map do |identifier, index|
         StoryboardTemplates::VIEW_CONTROLLER_DEFINITION_TEMPLATE.gsub('{IDENTIFIER}', format_view_controller(identifier))
       end.join("\n"))
     end
 
     def view_controller_implementations
-      prepend_title(VIEW_CONTROLLER_SECTION_TITLE, storyboard.view_controller_identifiers.each_with_index.map do |identifier, index|
+      prepend_title(VIEW_CONTROLLER_SECTION_TITLE, storyboard.view_controller_identifiers.sort.each_with_index.map do |identifier, index|
         StoryboardTemplates::VIEW_CONTROLLER_IMPLEMENTATION_TEMPLATE\
           .gsub('{IDENTIFIER}', variable_name(identifier))\
           .gsub('{CAPITALIZED_IDENTIFIER}', format_view_controller(identifier))
