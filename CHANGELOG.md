@@ -1,3 +1,8 @@
+# 1.0.6
+
+- Add option to write custom copyright text
+- Sort identifiers alphabetically, reducing diffs
+
 # 1.0.5
 
 - Cache identifiers for navigation controllers
