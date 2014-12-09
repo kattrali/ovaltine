@@ -126,12 +126,12 @@ module Ovaltine
     end
 
     def format_segue_identifier identifier
-      format(identifier, 'identifier', 'SegueIdentifier')
+      format(identifier, 'segue|(segue)?identifier', 'SegueIdentifier')
     end
 
-    def format identifier, required_suffix, suffix, capitalize=false
+    def format identifier, suffix_matcher, suffix, capitalize=false
       formatted = identifier.gsub(/\W/,'_')
-      unless formatted =~ /#{required_suffix}$/i
+      unless formatted =~ /#{suffix_matcher}$/i
         formatted = "#{formatted}#{suffix}"
       end
       capitalize ? formatted.gsub(/\b\w/){ $&.upcase } : formatted
