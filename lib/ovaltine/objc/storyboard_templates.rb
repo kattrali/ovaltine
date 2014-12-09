@@ -2,8 +2,8 @@
 module Ovaltine
   class StoryboardTemplates
 
-    VIEW_CONTROLLER_DEFINITION_TEMPLATE='+(UIViewController *)instantiate{IDENTIFIER};'
-    VIEW_CONTROLLER_IMPLEMENTATION_TEMPLATE='+(UIViewController *)instantiate{CAPITALIZED_IDENTIFIER} { return [[self storyboard] instantiateViewControllerWithIdentifier:{IDENTIFIER}]; }'
+    VIEW_CONTROLLER_DEFINITION_TEMPLATE='+(id)instantiate{IDENTIFIER};'
+    VIEW_CONTROLLER_IMPLEMENTATION_TEMPLATE='+(id)instantiate{CAPITALIZED_IDENTIFIER} { return [[self storyboard] instantiateViewControllerWithIdentifier:{IDENTIFIER}]; }'
 
     STATIC_IDENTIFIER_TEMPLATE='static NSString *const {IDENTIFIER_CONSTANT_NAME} = @"{IDENTIFIER}";'
     SEGUE_DEFINITION_TEMPLATE='+(NSString *){IDENTIFIER};'
