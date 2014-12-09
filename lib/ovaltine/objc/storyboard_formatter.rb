@@ -63,7 +63,9 @@ module Ovaltine
     end
 
     def static_variables
-      identifiers = (storyboard.cell_reuse_identifiers + storyboard.view_controller_identifiers + storyboard.segue_identifiers + [storyboard.name]).sort
+      identifiers = (storyboard.cell_reuse_identifiers + 
+        storyboard.view_controller_identifiers + 
+        storyboard.segue_identifiers + [storyboard.name]).sort.uniq
       identifiers.map do |identifier|
         StoryboardTemplates::STATIC_IDENTIFIER_TEMPLATE\
           .gsub('{IDENTIFIER}', identifier)\
