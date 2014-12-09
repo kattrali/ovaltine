@@ -25,7 +25,7 @@ module Ovaltine
     paths = write_files(formatters)
 
     if project_filepath = options[:project] || Dir.glob("#{File.dirname(path)}/**/*.xcodeproj").first
-      return unless options[:auto_add] or prompt("[Experimental] Add files to project? (y/N)", 'n')
+      return unless options[:auto_add] or prompt("Add files to project? (y/N)", 'n')
       project = XcodeProject.new(project_filepath)
       if paths.sort.map {|p| project.add_file_ref(p)}.compact.size > 0
         project.save
