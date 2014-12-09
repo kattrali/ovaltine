@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ovaltine (1.0.5)
+    ovaltine (1.1.0)
 
 GEM
   remote: https://rubygems.org/

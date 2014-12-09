@@ -1,3 +1,10 @@
+# 1.1.0
+
+- [Breaking Change] Allow 'segue' as a segue identifier suffix. Segue names 
+  ending with 'segue' will not have 'SegueIdentifier' appended to them.
+- Hotfix for cached constant names generating duplicates
+- Remove casting from view controller convenience selectors, instead returning 'id'
+
 # 1.0.6
 
 - Add option to write custom copyright text
