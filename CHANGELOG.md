@@ -1,3 +1,7 @@
+# 1.1.1
+
+- Fix runtime error when segue generated selector name and implementation name differ
+
 # 1.1.0
 
 - [Breaking Change] Allow 'segue' as a segue identifier suffix. Segue names 
