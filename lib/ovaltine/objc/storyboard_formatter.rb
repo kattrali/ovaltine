@@ -89,7 +89,7 @@ module Ovaltine
 
     def segue_identifier_definitions
       prepend_title(SEGUE_SECTION_TITLE, storyboard.segue_identifiers.sort.each_with_index.map do |identifier, index|
-        StoryboardTemplates::SEGUE_DEFINITION_TEMPLATE.gsub('{IDENTIFIER}', format(identifier, 'identifier', 'SegueIdentifier'))
+        StoryboardTemplates::SEGUE_DEFINITION_TEMPLATE.gsub('{IDENTIFIER}', format_segue_identifier(identifier))
       end.join("\n"))
     end
 

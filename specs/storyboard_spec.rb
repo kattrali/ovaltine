@@ -27,7 +27,7 @@ describe 'Storyboard' do
   end
 
   it 'caches identifiers for named segues' do
-    @storyboard.segue_identifiers.should.include "starterSegueIdentifier"
+    @storyboard.segue_identifiers.should.include "starterSegue"
   end
 
   it 'caches cell reuse identifiers for table view cells' do
