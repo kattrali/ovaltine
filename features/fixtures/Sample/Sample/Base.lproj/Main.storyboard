@@ -18,12 +18,11 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yMY-0R-ijt">
                                 <rect key="frame" x="137" y="359" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="5au-Nw-4lc" kind="push" identifier="starterSegueIdentifier" id="1Jc-Bc-ntv"/>
+                                    <segue destination="5au-Nw-4lc" kind="push" identifier="starterSegue" id="1Jc-Bc-ntv"/>
                                 </connections>
                             </button>
                         </subviews>
